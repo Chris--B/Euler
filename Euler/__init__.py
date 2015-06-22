@@ -19,7 +19,7 @@ def main():
 		end = time.clock()
 		times.append(end - start)
 
-		print("#{:0>3}: {:<10} ({}) {}"
+		print("#{:0>3}: {:<15} ({}) {}"
 		      .format(i, solution, format_time(times[-1]), check_solution(i, solution)))
 
 	wall_end = time.clock()
@@ -106,4 +106,5 @@ known_solutions = [
 	(5, 232792560),
 	(6, 25164150),
 	(7, 104743),
+	(8, 23514624000),
 ]
