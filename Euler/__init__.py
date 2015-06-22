@@ -4,6 +4,7 @@ import time
 def main():
 	times = []
 
+	wall_start = time.clock()
 	for (i, problem) in solved_problems():
 		start = time.clock()
 		err = problem.check_given()
@@ -17,7 +18,9 @@ def main():
 			print("#{:0>3}: {:<10} ({})"
 			      .format(i, problem.compute_answer(), format_time(times[-1])))
 
+	wall_end = time.clock()
 	print()
+	print("Wall    ", format_time(wall_end - wall_start))
 	print("Problems", format_time(sum(times)))
 
 
