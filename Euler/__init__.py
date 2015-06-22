@@ -58,7 +58,9 @@ def solved_problems(problems=None):
 			yield (problem, importlib.import_module(problem_str))
 		# We couldn't find the module, but maybe we just skipped this one? Keep going.
 		except ImportError as e:
-			pass
+			if str(e).startswith("No module named 'Euler.euler"):
+				continue
+			raise e
 
 def format_time(time):
 	"""
