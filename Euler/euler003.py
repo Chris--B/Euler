@@ -16,9 +16,6 @@ def check_given():
 		return "#003: prime_factors(13195) returned {}, but expected {}.".format(actual, expected)
 	return None
 
-def prime_factors(num):
-	primes = utils.primes_below(num)
-	return [prime for prime in primes if num % prime == 0]
-
 def largest_prime_factor(num):
-	return prime_factors(num)[-1]
+	prime, power = utils.prime_factors(num)[-1]
+	return prime
