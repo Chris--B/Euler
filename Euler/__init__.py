@@ -19,8 +19,8 @@ def main():
 		end = time.clock()
 		times.append(end - start)
 
-		print("#{:0>3}: {:<10} ({})"
-		      .format(i, solution, format_time(times[-1])))
+		print("#{:0>3}: {:<10} ({}) {}"
+		      .format(i, solution, format_time(times[-1]), check_solution(i, solution)))
 
 	wall_end = time.clock()
 	print()
@@ -80,3 +80,25 @@ def format_time(time):
 		return "{:>3} us".format(int(time * 1e6 + 0.5))
 	else:
 		return "{:>3} ns".format(int(time * 1e9 + 0.5))
+
+def check_solution(problem, answer):
+	"""
+	Verify whether or not `answer` is the correct solution to problem #`problem`.
+	If it is, return an empty string.
+	If it is not, return a string to print. e.g. "Expected ###", where ### is the actual solution.
+	If no data for the problem can be found, return a string saying so.
+	"""
+	for (known_problem, solution) in known_solutions:
+		if known_problem == problem:
+			if answer != solution:
+				return "Expected {}".format(solution)
+			return ""
+	return "(Unverified)"
+
+# A list of known solutions, added to after the problem is solved but before the commit.
+known_solutions = [
+	(1, 233168),
+	(2, 4613732),
+	(3, 6857),
+	(4, 906609),
+]
