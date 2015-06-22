@@ -58,7 +58,13 @@ def solved_problems(problems=None):
 			yield (problem, importlib.import_module(problem_str))
 		# We couldn't find the module, but maybe we just skipped this one? Keep going.
 		except ImportError as e:
-			if str(e).startswith("No module named 'Euler.euler"):
+			# CPython and Pypy have *slightly* different error messages.
+			# Other implementations might have different ones.
+			# TODO: Investigate and maybe base this check on substrings.
+			# e.g. check for "no module" and "Euler.euler[0-9]{3}".
+			# Also, relying on error message syntax is likely not stable.
+			if str(e).startswith("No module named 'Euler.euler") \
+			   or str(e).startswith("No module named Euler.euler"):
 				continue
 			raise e
 
