@@ -20,12 +20,16 @@ def primes_below(num):
 
 	primes = [2]
 
+	# Cross off multiples of primes.
 	for i in range(1, limit):
 		if sieve[i]:
+			# Anytime we find a square that hasn't been marked off, it's prime.
 			prime = 2*i + 1
 			primes.append(prime)
-			for j in range(i + prime, limit, prime):
-				sieve[j] = False
+
+			# Now we need to mark the multiples of the prime we just found as composite.
+			multiples_count = len(sieve[i+prime:limit:prime])
+			sieve[i+prime:limit:prime] = [False]*multiples_count
 
 	return primes
 
