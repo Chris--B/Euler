@@ -16,7 +16,7 @@ def check_given():
 	actual = sum_even_fibonacci(90)
 
 	if actual != expected:
-		return "#002: sum_even_fibonacci(90) expected {expected}, but returned {actual}".format(
+		return "#002: sum_even_fibonacci(90) expected {expected}, but returned {actual}.".format(
 			**vars())
 
 	return None

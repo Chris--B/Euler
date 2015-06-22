@@ -12,7 +12,7 @@ def check_given():
 	expected = 23
 	actual = sum_mults_3_or_5(10)
 	if actual != expected:
-		return "#001: sum_mults_3_or_5(10) returned {}, but expected {}".format(actual, expected)
+		return "#001: sum_mults_3_or_5(10) returned {}, but expected {}.".format(actual, expected)
 	return None
 
 def sum_mults_3_or_5(below):
