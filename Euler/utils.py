@@ -6,7 +6,11 @@ def product(nums):
 	return reduce(operator.mul, nums, 1)
 
 def primes_below(num):
-	limit = num
+	# Make sure num is odd. Our code expects anything in the sieve to be odd, and we want the end
+	# of the sieve to represent num.
+	if num % 2 == 0:
+		num += 1
+	limit = (num - 1) // 2
 
 	# Index `idx` in sieve represents the primality of `2*idx + 1`.
 	# TODO: I wonder if this works when the largest prime factor >= sqrt(num).
@@ -16,7 +20,7 @@ def primes_below(num):
 
 	primes = [2]
 
-	for i in range(1, num):
+	for i in range(1, limit):
 		if sieve[i]:
 			prime = 2*i + 1
 			primes.append(prime)
