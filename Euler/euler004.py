@@ -1,3 +1,4 @@
+import math
 
 problem_text = """
 A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
@@ -17,14 +18,23 @@ def check_given():
 	return None
 
 def largest_palindrome_from_n_digit_product(digits):
-	largest = 10 ** digits - 1
-	def palindromes():
-		# Larger factors usually means larger number. Start the search at 99...9 and go down.
-		for a in range(largest, 0, -1):
-			for b in range(largest, 0, -1):
-				string = str(a*b)
-				if string == string[::-1]:
-					yield a*b
+	limit = 10 ** digits - 1
 
-	return max(palindromes())
+	largest = 0
+
+	# Larger factors usually means larger number. Start the search at 99...9 and go down.
+	# The lower bound doesn't matter, because we'll break out of it before hitting it.
+	# TODO: Test that claim.
+	for a in range(limit, limit // 10, -1):
+		for b in range(limit, a, -1):
+			# No point in making `b` smaller: it's already too small, so just skip the rest of
+			# the `b`s for this `a`.
+			if a*b < largest:
+				break
+
+			string = str(a*b)
+			if string == string[::-1]:
+				largest = max(largest, a*b)
+
+	return largest
 
