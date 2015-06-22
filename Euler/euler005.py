@@ -1,5 +1,4 @@
-from functools import reduce
-import operator
+from Euler import utils
 
 problem_text = """
 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
@@ -17,9 +16,6 @@ def check_given():
 		return"#005: f(10) gave {}, but expected {}".format(actual, expected)
 	return None
 
-def product(nums):
-	return reduce(operator.mul, nums, 1)
-
 def largest_power_bounded(base, bound):
 	num = 1
 	power = 0
@@ -33,4 +29,4 @@ def smallest_evenly_divided(limit):
 	# So... pretend limit <= 23.
 	assert(limit <= 23)
 	primes = [2, 3, 5, 7, 11, 13, 17, 19, 23]
-	return product(prime ** largest_power_bounded(prime, limit) for prime in primes)
+	return utils.product(prime ** largest_power_bounded(prime, limit) for prime in primes)

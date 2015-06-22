@@ -1,4 +1,9 @@
+from functools import reduce
 import math
+import operator
+
+def product(nums):
+	return reduce(operator.mul, nums, 1)
 
 def primes_below(num):
 	limit = num
