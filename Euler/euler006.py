@@ -21,7 +21,7 @@ def check_given():
 		return "#006: f(10) returned {}, but expected {}".format(actual, expected)
 	return None
 
-def sum_square_diff(limit):
-	sum_squares = sum(num*num for num in range(limit+1))
-	square_sum = sum(range(limit+1)) ** 2
+def sum_square_diff(num):
+	sum_squares = num * (num + 1) * (2*num + 1) // 6
+	square_sum = (num * (num + 1) // 2) ** 2
 	return square_sum - sum_squares
