@@ -6,17 +6,21 @@ def main():
 
 	wall_start = time.clock()
 	for (i, problem) in solved_problems():
-		start = time.clock()
+		# Should these be exceptions?
 		err = problem.check_given()
+		if err:
+			print(err)
+			continue
+
+		start = time.clock()
+
+		solution = problem.compute_answer()
+
 		end = time.clock()
 		times.append(end - start)
 
-		# Should these be exceptions?
-		if err:
-			print(err)
-		else:
-			print("#{:0>3}: {:<10} ({})"
-			      .format(i, problem.compute_answer(), format_time(times[-1])))
+		print("#{:0>3}: {:<10} ({})"
+		      .format(i, solution, format_time(times[-1])))
 
 	wall_end = time.clock()
 	print()
