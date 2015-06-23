@@ -34,20 +34,27 @@ def primes_below(num):
 	return primes
 
 def prime_factors(num):
+	factors = []
+
+	# Hard code a check for 2, since it's the only even prime.
 	count = 0
 	while num % 2 == 0:
 		num //= 2
 		count += 1
+	if count > 0:
+		factors.append((2, count))
 
-	factors = [(2, count)]
-	# While this isn't strickly prime, it will be if it enters the while loop,
+	# While this isn't strictly prime, it will be if it enters the while loop,
 	# because if it's not prime, it has a prime factor that's already gone through the loop.
-	for prime in range(3, int(math.sqrt(num) + 1), 2):
+	for prime in range(3, num+1, 2):
+		if num <= 1:
+			break
+
 		count = 0
 		while num % prime == 0:
 			num //= prime
 			count += 1
-		if count != 0:
+		if count > 0:
 			factors.append((prime, count))
 
 	return factors
