@@ -27,7 +27,6 @@ def main():
 	print("Wall    ", format_time(wall_end - wall_start))
 	print("Problems", format_time(sum(times)))
 
-
 def solved_problems(problems=None):
 	"""
 	Import modules of the form Euler.euler###, where ### is a three digit number with zero padding.
@@ -50,7 +49,8 @@ def solved_problems(problems=None):
 		# e.g.:
 		#   Project Euler launched in 2001,
 		#   Problem 522 is due to be published on June 27th, 2015
-		problems = range(1, 1000)
+		# Go backwards, so that the newest problem is displayed first.
+		problems = range(999, 0, -1)
 
 	for problem in problems:
 		problem_str = "Euler.euler{:03d}".format(problem)
