@@ -2,7 +2,19 @@ from collections import defaultdict
 from Euler import utils
 
 problem_text = """
+The following iterative sequence is defined for the set of positive integers:
 
+n → n/2 (n is even)
+n → 3n + 1 (n is odd)
+
+Using the rule above and starting with 13, we generate the following sequence:
+
+13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+
+Which starting number, under one million, produces the longest chain?
+
+NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 
 def compute_answer():
@@ -19,17 +31,18 @@ def longest_collatz_length_below(num):
 	cache = dict()
 	cache[1] = 0
 
+	# The number with the longest chain seed so far.
+	longest_chain = 1
+
 	# Skip evens. They all have a corresponding odd somewhere, except for things with high powers
 	# of two. But those aren't going to have long chains anyway.
 	for number in range(3, num, 2):
-		calc_collatz_length(number, cache)
+		length = calc_collatz_length(number, cache)
+		# Compute the maximum as we go, instead of iterating over everything twice.
+		if length > cache[longest_chain] and number < num:
+			longest_chain = number
 
-	# Some intermediate numbers will jump way above the limit we have.
-	# Make sure we don't count them.
-	eligible = ((number, length) for (number, length) in cache.items() if number <= num)
-
-	# We want the chain with the longest length.
-	return max(eligible, key=lambda item: item[1])[0]
+	return longest_chain
 
 def calc_collatz_length(num, cache):
 	"""
