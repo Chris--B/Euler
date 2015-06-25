@@ -19,7 +19,8 @@ def longest_collatz_length_below(num):
 	cache = dict()
 	cache[1] = 0
 
-	# Skip evens. They all have a corresponding odd somewhere.
+	# Skip evens. They all have a corresponding odd somewhere, except for things with high powers
+	# of two. But those aren't going to have long chains anyway.
 	for number in range(3, num, 2):
 		calc_collatz_length(number, cache)
 
@@ -37,7 +38,7 @@ def calc_collatz_length(num, cache):
 	"""
 
 	history = []
-	# We're going to need the value of `num` later.
+	# We're going to need the value of `num` later, so best we don't modify it.
 	xx = num
 
 	while xx not in cache.keys():
