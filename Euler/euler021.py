@@ -21,6 +21,7 @@ def check_given():
 			actual, expected)
 	return None
 
+@utils.memoize
 def d(number):
 	""""
 	Return the sum of proper divisors of n (numbers < n which divide n).
