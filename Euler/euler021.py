@@ -20,7 +20,6 @@ def check_given():
 		return "#021: f(1000) returned {}, but expected {}".format(actual, expected)
 	return None
 
-@utils.memoize
 def d(number):
 	""""
 	Return the sum of proper divisors of n (numbers < n which divide n).
