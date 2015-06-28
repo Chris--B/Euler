@@ -17,7 +17,7 @@ def check_given():
 	expected = 504
 	actual = sum(amicable_numbers_below(1000))
 	if actual != expected:
-		return "#021: f(10) returned {}, but expected {}".format(actual, expected)
+		return "#021: f(1000) returned {}, but expected {}".format(actual, expected)
 	return None
 
 @utils.memoize
@@ -25,11 +25,21 @@ def d(number):
 	""""
 	Return the sum of proper divisors of n (numbers < n which divide n).
 	"""
-	res = 0
-	for num in range(1, number):
-		if number % num == 0:
-			res += num
-	return res
+	total = 1
+
+	# We make use of this algorithm:
+	# http://mathschallenge.net/index.php?section=faq&ref=number/sum_of_divisors
+	# Basically, the sum of divisors is also the product of co-prime divisors plus 1.
+	#     e.g., for 72 = 2^3 * 3^2, the sum of all divisors = (2^3 + 1) * (3^2 + 1).
+	#     Since we only want divisors less than `number`, we subtract it off at the end.
+	for prime, power in utils.prime_factors(number):
+		if power == 1:
+			total *= prime + 1
+		else:
+			total *= (prime ** (power+1) - 1) // (prime - 1)
+
+	# Remember, only the divisors < number. Not <=.
+	return total - number
 
 def amicable_numbers_below(below):
 	"""
@@ -41,8 +51,11 @@ def amicable_numbers_below(below):
 		# Don't recalculate it if we don't have to.
 		d_num = d(num)
 
-		# Numbers which are their own pair are surprisingly common. 6, 28, and 496 below 1000. Wow!
-		if d(d_num) == num and d_num != num:
+		# Only bother computing d(d_num) if num is the smaller in the pair. Then we never skip this
+		# *first*.
+		# This also rules out "perfect" numbers (where d_num == num).
+		if d_num > num and d(d_num) == num:
 			pairs.append(num)
+			pairs.append(d_num)
 
 	return pairs
