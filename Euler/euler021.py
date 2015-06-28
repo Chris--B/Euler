@@ -17,8 +17,7 @@ def check_given():
 	expected = 504
 	actual = sum(amicable_numbers_below(1000))
 	if actual != expected:
-		return "#021: f(10) returned {}, but expected {}".format(
-			actual, expected)
+		return "#021: f(10) returned {}, but expected {}".format(actual, expected)
 	return None
 
 @utils.memoize

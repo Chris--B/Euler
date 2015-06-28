@@ -18,6 +18,5 @@ def check_given():
 	expected = 27
 	actual = utils.sum_digits(math.factorial(10))
 	if actual != expected:
-		return "#020: f(10) returned {}, but expected {}".format(
-			actual, expected)
+		return "#020: f(10) returned {}, but expected {}".format(actual, expected)
 	return None
