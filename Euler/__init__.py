@@ -104,6 +104,7 @@ def check_solution(problem, answer):
 	return "(Unverified)"
 
 # A list of known solutions, added to after the problem is solved but before the commit.
+# These are added in the order which they were solved.
 known_solutions = [
 	(1, 233168),
 	(2, 4613732),
@@ -121,4 +122,5 @@ known_solutions = [
 	(14, 837799),
 	(16, 1366),
 	(15, 137846528820),
+	(20, 648),
 ]
