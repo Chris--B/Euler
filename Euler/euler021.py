@@ -45,7 +45,4 @@ def amicable_numbers_below(below):
 		if d(d_num) == num and d_num != num:
 			pairs.append(num)
 
-	for num in pairs:
-		print(num, d(num))
-
 	return pairs
