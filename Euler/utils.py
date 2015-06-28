@@ -59,4 +59,6 @@ def prime_factors(num):
 
 	return factors
 
+def sum_digits(num):
+	return sum(int(digit) for digit in str(num))
 
