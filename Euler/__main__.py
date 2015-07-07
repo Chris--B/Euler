@@ -131,7 +131,7 @@ def parse_problems(args):
 		if '-' in arg:
 			start, end = arg.split('-')
 			start = int(start)
-			end = int(end)
+			end = int(end)+1
 			if start < 1:
 				start = 1
 			if end > 1000:
