@@ -1,16 +1,13 @@
 
 problem_text = """
-
 """
 
 def compute_answer():
-	return someBiggerNumber
+	pass
 
-# TODO: Generalize this function.
 def check_given():
 	expected = 0
-	actual = mainFunction(someNumber)
+	actual = None
 	if actual != expected:
-		return "#@@@: f(someNumber) returned {}, but expected {}".format(
-			actual, expected)
+		return "#@@@: Found {}, but expected {}".format(actual, expected)
 	return None
