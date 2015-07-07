@@ -2,6 +2,19 @@ from functools import reduce
 import math
 import operator
 
+def memoize(func):
+	"""
+	Memoization decorator for a function taking a single argument. For arguments taking more,
+	consider rewriting them to take a tuple instead for performance reasons.
+
+	See: http://code.activestate.com/recipes/578231-probably-the-fastest-memoization-decorator-in-the-/
+	"""
+	class memodict(dict):
+		def __missing__(self, key):
+			ret = self[key] = func(key)
+			return ret
+	return memodict().__getitem__
+
 def product(nums):
 	return reduce(operator.mul, nums, 1)
 
@@ -33,7 +46,11 @@ def primes_below(num):
 
 	return primes
 
+@memoize
 def prime_factors(num):
+	if 0 < num < 2:
+		return []
+
 	factors = []
 
 	# Hard code a check for 2, since it's the only even prime.
@@ -61,16 +78,3 @@ def prime_factors(num):
 
 def sum_digits(num):
 	return sum(int(digit) for digit in str(num))
-
-def memoize(func):
-	"""
-	Memoization decorator for a function taking a single argument. For arguments taking more,
-	consider rewriting them to take a tuple instead for performance reasons.
-
-	See: http://code.activestate.com/recipes/578231-probably-the-fastest-memoization-decorator-in-the-/
-	"""
-	class memodict(dict):
-		def __missing__(self, key):
-			ret = self[key] = func(key)
-			return ret
-	return memodict().__getitem__
