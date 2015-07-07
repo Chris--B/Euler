@@ -1,11 +1,21 @@
 import importlib
+import sys
 import time
 
 def main():
 	times = []
 
+	# If there are any problems listed on the command line, run only those.
+	# Otherwise, run all problems solved so far.
+	if len(sys.argv) > 1:
+		# Don't pass in the filename. This function operates on a list of numbers
+		# and ranges.
+		problems = parse_problems(sys.argv[1:])
+	else:
+		problems = range(1000)
+
 	wall_start = time.clock()
-	for (i, problem) in solved_problems():
+	for (i, problem) in solved_problems(problems):
 		# Should these be exceptions?
 		err = problem.check_given()
 		if err:
@@ -101,6 +111,37 @@ def check_solution(problem, answer):
 				return "Expected {}".format(solution)
 			return ""
 	return "(Unverified)"
+
+def parse_problems(args):
+	"""
+	Parse an argv-style array of arguments for ranges. Space or comma separated
+	lists are supported, as are dashed ranges of 1, 2, or 3 digit integer
+	strings. Strings are converted to integers via the built-in `int()`.
+	Acceptable values for `args`:
+		[]
+		["1", "2", "3", "4"]
+		["1-4"]
+		["1", "2-3", "4"]
+	All produce the same result: [1, 2, 3, 4].
+	Arguments starting with "--" are ignored. (and possibly handled separately.)
+	"""
+	problems = []
+
+	for arg in args:
+		if '-' in arg:
+			start, end = arg.split('-')
+			start = int(start)
+			end = int(end)
+			if start < 1:
+				start = 1
+			if end > 1000:
+				end = 1000
+			problems += list(range(start, end))
+		else:
+			problems.append(int(arg))
+
+	return problems
+
 
 # A list of known solutions, added to after the problem is solved but before the commit.
 # These are added in the order which they were solved.
