@@ -113,6 +113,7 @@ def compute_answer():
 	]
 	return int(str(sum(big_nums))[:10])
 
-def check_given():
+given = [
 	# No example given.
-	return None
+	(None, None),
+]

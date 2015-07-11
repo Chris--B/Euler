@@ -7,11 +7,19 @@ def main(problems):
 
 	wall_start = time.clock()
 	for (i, problem) in solved_problems(problems):
-		# Should these be exceptions?
-		err = problem.check_given()
-		if err:
-			print(err)
-			continue
+		if len(problem.given) == 0:
+			print("#{:03d}: Skipping checks (none found)".format(i))
+		else:
+			given_had_failures = False
+
+			for expected, actual in problem.given:
+				if expected != actual:
+					given_had_failures = True
+					print("#{:03d}: Found {}, but expected {}"
+						.format(i, actual, expected))
+
+			if given_had_failures:
+				continue
 
 		start = time.clock()
 

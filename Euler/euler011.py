@@ -52,15 +52,6 @@ given_grid = [
 	[ 1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48],
 ]
 
-def compute_answer():
-	return great_line_product(given_grid)
-
-def check_given():
-	# I have no idea how to pull a given sample from this one.
-	# So there isn't one.
-	# Maybe I could make my own, smaller grid?
-	return None
-
 def great_line_product(grid):
 	largest = 0
 	point = (-1, -1)
@@ -125,3 +116,13 @@ def great_line_product(grid):
 						direction = "ru_diagonal"
 
 	return largest
+
+def compute_answer():
+	return great_line_product(given_grid)
+
+given = [
+	# I have no idea how to pull a given sample from this one.
+	# So there isn't one.
+	# Maybe I could make my own, smaller grid?
+	(None, None),
+]

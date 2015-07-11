@@ -14,17 +14,6 @@ value of n is unique, and there are only four such primes below one-hundred.
 How many primes below one million have this remarkable property?
 """
 
-def compute_answer():
-	return len(prime_cubes_below(1000000))
-
-def check_given():
-	expected = 4
-	actual = len(prime_cubes_below(100))
-	if actual != expected:
-		return "#131: Found {}, but expected {}".format(
-			actual, expected)
-	return None
-
 def prime_cubes_below(below):
 	primes = utils.primes_below(below)
 	res = []
@@ -42,3 +31,10 @@ def prime_cubes_below(below):
 			break
 
 	return res
+
+def compute_answer():
+	return len(prime_cubes_below(1000000))
+
+given = [
+	(4, len(prime_cubes_below(100))),
+]

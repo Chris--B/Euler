@@ -6,17 +6,6 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 """
 
-def compute_answer():
-	return largest_palindrome_from_n_digit_product(3)
-
-def check_given():
-	expected = 9009
-	actual = largest_palindrome_from_n_digit_product(2)
-	if actual != expected:
-		return "#004: largest_palindrome_from_n_digit_product(2) returned {}, but expected {}".format(
-			actual, expected)
-	return None
-
 def largest_palindrome_from_n_digit_product(digits):
 	limit = 10 ** digits - 1
 
@@ -38,3 +27,9 @@ def largest_palindrome_from_n_digit_product(digits):
 
 	return largest
 
+def compute_answer():
+	return largest_palindrome_from_n_digit_product(3)
+
+given = [
+	(9009, largest_palindrome_from_n_digit_product(2)),
+]

@@ -56,3 +56,8 @@ def fibonacci(limit=None):
 		a, b = a + b, a
 		idx += 1
 		yield (idx, a)
+
+given = [
+	# 10 ** 2 is the first 3-digit number, 10 ** 3 - 1 the last.
+	(12, first_fib_above(10 ** 2)),
+]

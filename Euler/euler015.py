@@ -6,16 +6,6 @@ problem_text = """
 What is the sum of the digits of the number 21000?
 """
 
-def compute_answer():
-	return paths_over_square_lattice(20)
-
-def check_given():
-	expected = 6
-	actual = paths_over_square_lattice(2)
-	if actual != expected:
-		return "#015: f(2) returned {}, but expected {}.".format(actual, expected)
-	return None
-
 def paths_over_square_lattice(size):
 	return nCr(2*size, size)
 
@@ -29,3 +19,10 @@ def nCr(n, r):
 	denominator = utils.product(range(1, r+1))
 
 	return numerator // denominator
+
+def compute_answer():
+	return paths_over_square_lattice(20)
+
+given = [
+	(6, paths_over_square_lattice(2)),
+]

@@ -10,16 +10,6 @@ For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 a
 Evaluate the sum of all the amicable numbers under 10000.
 """
 
-def compute_answer():
-	return sum(amicable_numbers_below(10000))
-
-def check_given():
-	expected = 504
-	actual = sum(amicable_numbers_below(1000))
-	if actual != expected:
-		return "#021: f(1000) returned {}, but expected {}".format(actual, expected)
-	return None
-
 def d(number, primes):
 	""""
 	Return the sum of proper divisors of n (numbers < n which divide n).
@@ -59,3 +49,10 @@ def amicable_numbers_below(below):
 			pairs.append(d_num)
 
 	return pairs
+
+def compute_answer():
+	return sum(amicable_numbers_below(10000))
+
+given = [
+	(504, sum(amicable_numbers_below(1000))),
+]

@@ -6,16 +6,6 @@ problem_text = """
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 """
 
-def compute_answer():
-	return smallest_evenly_divided(20)
-
-def check_given():
-	expected = 2520
-	actual = smallest_evenly_divided(10)
-	if actual != expected:
-		return"#005: f(10) gave {}, but expected {}".format(actual, expected)
-	return None
-
 def largest_power_bounded(base, bound):
 	num = 1
 	power = 0
@@ -30,3 +20,11 @@ def smallest_evenly_divided(limit):
 	assert(limit <= 23)
 	primes = [2, 3, 5, 7, 11, 13, 17, 19, 23]
 	return utils.product(prime ** largest_power_bounded(prime, limit) for prime in primes)
+
+def compute_answer():
+	return smallest_evenly_divided(20)
+
+
+given = [
+	(2520, smallest_evenly_divided(10)),
+]

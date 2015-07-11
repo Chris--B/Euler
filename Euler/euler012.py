@@ -20,16 +20,6 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 """
 
-def compute_answer():
-	return first_triangle_with_divisors(500)
-
-def check_given():
-	expected = 28
-	actual = first_triangle_with_divisors(5)
-	if actual != expected:
-		return "#012: f(5) returned {}, but expected {}".format(actual, expected)
-	return None
-
 def first_triangle_with_divisors(count):
 	num = 1
 	tri_num = 1
@@ -50,8 +40,13 @@ def first_triangle_with_divisors(count):
 		if count_factors(tri_num, primes) >= count:
 			return tri_num
 
-
 def count_factors(num, primes):
 	pfactors = utils.prime_factors_cached(num, primes)
 	return utils.product(power+1 for (_, power) in pfactors)
 
+def compute_answer():
+	return first_triangle_with_divisors(500)
+
+given = [
+	(28, first_triangle_with_divisors(5)),
+]

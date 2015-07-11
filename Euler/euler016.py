@@ -9,9 +9,6 @@ What is the sum of the digits of the number 21000?
 def compute_answer():
 	return utils.sum_digits(2 ** 1000)
 
-def check_given():
-	expected = 26
-	actual = utils.sum_digits(2 ** 15)
-	if actual != expected:
-		return "#016: f(2 ** 15) returned {}, but expected {}.".format(actual, expected)
-	return None
+given = [
+	(26, utils.sum_digits(2 ** 15)),
+]

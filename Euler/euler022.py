@@ -12,28 +12,6 @@ What is the total of all the name scores in the file?
 
 NAMES_FILE = os.path.join(os.path.dirname(__file__), "resources/p022_names.txt")
 
-def compute_answer():
-	names = load_names_file(NAMES_FILE)
-
-	return sum(calc_name_score(idx, name) for (idx, name) in enumerate(names))
-
-def check_given():
-	# These are given in the project description. index is an INDEX, not the position.
-	name_idx = 937
-	name = "COLIN"
-
-	names = load_names_file(NAMES_FILE)
-	if names[name_idx] != name:
-		print("Expected {}, but found {} at index {}".format(
-			name, names[name_idx], name_idx))
-
-	expected = 49714
-	actual = calc_name_score(name_idx, names[name_idx])
-
-	if actual != expected:
-		return "#022: Found {}, but expected {}".format(actual, expected)
-	return None
-
 def calc_name_score(idx, name):
 	# The position is 1 indexed, but arrays in Python are 0-indexed.
 	return (idx+1) * sum(ord(letter) - ord("A") + 1 for letter in name)
@@ -45,3 +23,20 @@ def load_names_file(filename):
 		names = [name[1:-1] for name in names]
 	names.sort()
 	return names
+
+def compute_answer():
+	names = load_names_file(NAMES_FILE)
+	return sum(calc_name_score(idx, name) for (idx, name) in enumerate(names))
+
+# These are given in the project description. index is an INDEX, not the position.
+name_idx = 937
+name = "COLIN"
+
+names = load_names_file(NAMES_FILE)
+if names[name_idx] != name:
+	print("Expected {}, but found {} at index {}".format(
+		name, names[name_idx], name_idx))
+
+given = [
+	(49714, calc_name_score(name_idx, names[name_idx])),
+]

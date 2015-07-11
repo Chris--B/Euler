@@ -19,16 +19,6 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 
-def compute_answer():
-	return longest_collatz_length_below(int(1e6))
-
-def check_given():
-	expected = 9
-	actual = longest_collatz_length_below(10)
-	if actual != expected:
-		return "#014: f(5) returned {}, but expected {}".format(actual, expected)
-	return None
-
 def longest_collatz_length_below(below):
 	cache = defaultdict(lambda: None)
 	cache[1] = 0
@@ -59,3 +49,10 @@ def calc_collatz_length(number, cache):
 	base_length = cache[num]
 	for (offset, path_num) in enumerate(reversed(path), start=1):
 		cache[path_num] = base_length + offset
+
+def compute_answer():
+	return longest_collatz_length_below(int(1e6))
+
+given = [
+	(9, longest_collatz_length_below(10)),
+]

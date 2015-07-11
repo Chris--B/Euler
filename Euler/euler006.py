@@ -11,17 +11,14 @@ Hence the difference between the sum of the squares of the first ten natural num
 Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 """
 
-def compute_answer():
-	return sum_square_diff(100)
-
-def check_given():
-	expected = 2640
-	actual = sum_square_diff(10)
-	if actual != expected:
-		return "#006: f(10) returned {}, but expected {}".format(actual, expected)
-	return None
-
 def sum_square_diff(num):
 	sum_squares = num * (num + 1) * (2*num + 1) // 6
 	square_sum = (num * (num + 1) // 2) ** 2
 	return square_sum - sum_squares
+
+def compute_answer():
+	return sum_square_diff(100)
+
+given = [
+	(2640, sum_square_diff(10)),
+]
