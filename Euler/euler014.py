@@ -10,7 +10,9 @@ n → 3n + 1 (n is odd)
 Using the rule above and starting with 13, we generate the following sequence:
 
 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
-It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+It can be seen that this sequence (starting at 13 and finishing at 1) contains
+10 terms. Although it has not been proved yet (Collatz Problem), it is thought
+that all starting numbers finish at 1.
 
 Which starting number, under one million, produces the longest chain?
 
@@ -34,11 +36,11 @@ def longest_collatz_length_below(num):
 	# The number with the longest chain seed so far.
 	longest_chain = 1
 
-	# Skip evens. They all have a corresponding odd somewhere, except for things with high powers
+	# Skip evens. They all have a corresponding odd somewhere, except for things
+	#  with high powers
 	# of two. But those aren't going to have long chains anyway.
 	for number in range(3, num, 2):
 		length = calc_collatz_length(number, cache)
-		# Compute the maximum as we go, instead of iterating over everything twice.
 		if length > cache[longest_chain] and number < num:
 			longest_chain = number
 
@@ -46,8 +48,9 @@ def longest_collatz_length_below(num):
 
 def calc_collatz_length(num, cache):
 	"""
-	Calculate the collatz length of `num`, storing it in `cache`. `cache` is expected to map numbers
-	to collatz lengths, and is used to reduce repeated computation.
+	Calculate the collatz length of `num`, storing it in `cache`. `cache` is
+	expected to map numbers to collatz lengths, and is used to reduce repeated
+	computation.
 	"""
 
 	history = []
@@ -64,8 +67,8 @@ def calc_collatz_length(num, cache):
 	# `xx` is either 1 or a number we've already computed.
 	# Either way, it returns 0.
 	length = cache[xx]
-	# The length of the last item acts as a base length for the rest, which are linear
-	# with their position in the history... from the back.
+	# The length of the last item acts as a base length for the rest, which are
+	# linear with their position in the history... from the back.
 	for (offset, number) in enumerate(reversed(history)):
 		cache[number] = length + offset
 
