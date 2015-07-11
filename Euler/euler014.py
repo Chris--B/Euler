@@ -29,8 +29,8 @@ def check_given():
 		return "#014: f(5) returned {}, but expected {}".format(actual, expected)
 	return None
 
-def longest_collatz_length_below(num):
-	cache = dict()
+def longest_collatz_length_below(below):
+	cache = defaultdict(lambda: None)
 	cache[1] = 0
 
 	# The number with the longest chain seed so far.
@@ -39,37 +39,23 @@ def longest_collatz_length_below(num):
 	# Skip evens. They all have a corresponding odd somewhere, except for things
 	#  with high powers
 	# of two. But those aren't going to have long chains anyway.
-	for number in range(3, num, 2):
-		length = calc_collatz_length(number, cache)
-		if length > cache[longest_chain] and number < num:
+	for number in range(3, below, 2):
+		if cache[number] is None:
+			calc_collatz_length(number, cache)
+		if cache[number] > cache[longest_chain]:
 			longest_chain = number
 
 	return longest_chain
 
-def calc_collatz_length(num, cache):
-	"""
-	Calculate the collatz length of `num`, storing it in `cache`. `cache` is
-	expected to map numbers to collatz lengths, and is used to reduce repeated
-	computation.
-	"""
-
-	history = []
-	# We're going to need the value of `num` later, so best we don't modify it.
-	xx = num
-
-	while xx not in cache.keys():
-		history.append(xx)
-		if xx % 2 == 0:
-			xx //= 2
+def calc_collatz_length(number, cache):
+	num = number
+	path = []
+	while cache[num] is None:
+		path.append(num)
+		if num % 2 == 0:
+			num = num // 2
 		else:
-			xx = 3*xx + 1
-
-	# `xx` is either 1 or a number we've already computed.
-	# Either way, it returns 0.
-	length = cache[xx]
-	# The length of the last item acts as a base length for the rest, which are
-	# linear with their position in the history... from the back.
-	for (offset, number) in enumerate(reversed(history)):
-		cache[number] = length + offset
-
-	return cache[num]
+			num = 3*num + 1
+	base_length = cache[num]
+	for (offset, path_num) in enumerate(reversed(path), start=1):
+		cache[path_num] = base_length + offset
