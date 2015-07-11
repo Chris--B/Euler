@@ -2,17 +2,8 @@ import importlib
 import sys
 import time
 
-def main():
+def main(problems):
 	times = []
-
-	# If there are any problems listed on the command line, run only those.
-	# Otherwise, run all problems solved so far.
-	if len(sys.argv) > 1:
-		# Don't pass in the filename. This function operates on a list of numbers
-		# and ranges.
-		problems = parse_problems(sys.argv[1:])
-	else:
-		problems = range(1000)
 
 	wall_start = time.clock()
 	for (i, problem) in solved_problems(problems):
@@ -171,4 +162,13 @@ known_solutions = [
 ]
 
 if __name__ == "__main__":
-	main()
+	# If there are any problems listed on the command line, run only those.
+	# Otherwise, run all problems solved so far.
+	if len(sys.argv) > 1:
+		# Don't pass in the filename. This function operates on a list of numbers
+		# and ranges.
+		problems = parse_problems(sys.argv[1:])
+	else:
+		problems = range(1000)
+
+	main(problems)
