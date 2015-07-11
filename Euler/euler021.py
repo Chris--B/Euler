@@ -20,7 +20,7 @@ def check_given():
 		return "#021: f(1000) returned {}, but expected {}".format(actual, expected)
 	return None
 
-def d(number):
+def d(number, primes):
 	""""
 	Return the sum of proper divisors of n (numbers < n which divide n).
 	"""
@@ -31,7 +31,7 @@ def d(number):
 	# Basically, the sum of divisors is also the product of co-prime divisors plus 1.
 	#     e.g., for 72 = 2^3 * 3^2, the sum of all divisors = (2^3 + 1) * (3^2 + 1).
 	#     Since we only want divisors less than `number`, we subtract it off at the end.
-	for prime, power in utils.prime_factors(number):
+	for prime, power in utils.prime_factors_cached(number, primes):
 		if power == 1:
 			total *= prime + 1
 		else:
@@ -45,15 +45,16 @@ def amicable_numbers_below(below):
 	Return a list of numbers < below which are in an amicable pair.
 	"""
 	pairs = []
+	primes = utils.primes_below(below)
 
 	for num in range(1, below):
 		# Don't recalculate it if we don't have to.
-		d_num = d(num)
+		d_num = d(num, primes)
 
 		# Only bother computing d(d_num) if num is the smaller in the pair. Then we never skip this
 		# *first*.
 		# This also rules out "perfect" numbers (where d_num == num).
-		if d_num > num and d(d_num) == num:
+		if d_num > num and d(d_num, primes) == num:
 			pairs.append(num)
 			pairs.append(d_num)
 

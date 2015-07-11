@@ -1,4 +1,5 @@
 from functools import reduce
+import itertools
 import math
 import operator
 
@@ -48,23 +49,17 @@ def primes_below(num):
 
 @memoize
 def prime_factors(num):
+	divisors = itertools.chain([2], range(3, num+1, 2))
+	return prime_factors_cached(num, divisors)
+
+def prime_factors_cached(num, divisors):
 	if 0 < num < 2:
 		return []
 
 	factors = []
 
-	# Hard code a check for 2, since it's the only even prime.
-	count = 0
-	while num % 2 == 0:
-		num //= 2
-		count += 1
-	if count > 0:
-		factors.append((2, count))
-
-	# While this isn't strictly prime, it will be if it enters the while loop,
-	# because if it's not prime, it has a prime factor that's already gone through the loop.
-	for prime in range(3, num+1, 2):
-		if num <= 1:
+	for prime in divisors:
+		if num < 2 or prime > num:
 			break
 
 		count = 0
@@ -73,7 +68,6 @@ def prime_factors(num):
 			count += 1
 		if count > 0:
 			factors.append((prime, count))
-
 	return factors
 
 def sum_digits(num):
